@@ -2,7 +2,6 @@ package com.jasper.myweixin.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.nfc.Tag;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -16,15 +15,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.jasper.myweixin.R;
-
-import org.w3c.dom.Text;
+import com.jasper.myweixin.adapter.WeixinViewAdapter;
+import com.jasper.myweixin.entity.WeixinItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,7 +77,7 @@ public class MainActivity extends Activity {
         }
 
         LayoutInflater lf = LayoutInflater.from(this);
-        int[] tabIds = new int[]{R.layout.main_tab_weixin, R.layout.main_tab_address, R.layout.main_tab_friends, R.layout.main_tab_settingss};
+        int[] tabIds = new int[]{R.layout.main_tab_weixin, R.layout.main_tab_address, R.layout.main_tab_friends, R.layout.main_tab_settings};
        // final ArrayList<View> views = new ArrayList<>();
         for (int i=0; i<tabIds.length; i++) {
             views.add(lf.inflate(tabIds[i], null));
@@ -111,22 +108,24 @@ public class MainActivity extends Activity {
         //FIXME 特别要注意一下，views.get(0)的写法要改一下
         listViewWeixin = (ListView) (views.get(0).findViewById(R.id.list_weixin_1));
         List<Map<String, Object>> listItems = new ArrayList<>();
+        List<WeixinItem> items = new ArrayList<>();
         for (int i=0; i<20; i++) {
-            Map<String, Object> map = new HashMap<>();
+            WeixinItem item = new WeixinItem();
             if (i % 2 == 0) {
-                map.put("icon", R.drawable.xiaohei);
-                map.put("name", "小黑");
+                item.setHead(R.drawable.xiaohei);
+                item.setUserName("小黑");
             } else {
-                map.put("icon", R.drawable.renma);
-                map.put("name", "人马");
+                item.setHead(R.drawable.renma);
+                item.setUserName("人马");
             }
-            map.put("say", "今晚12点开黑打dota，今晚12点开黑打dota，今晚12点开黑打dota，今晚12点开黑打dota");
-            map.put("time", "昨晚12点");
-            listItems.add(map);
+            item.setSay("今晚12点开黑打dota，今晚12点开黑打dota，今晚12点开黑打dota，今晚12点开黑打dota");
+            item.setTime("昨晚12点");
+            items.add(item);
         }
-        listViewWeixin.setAdapter(new SimpleAdapter(this, listItems, R.layout.main_tab_weixin_item,
-                new String[]{"icon", "name", "say", "time"},
-                new int[]{R.id.img_icon, R.id.text_name, R.id.text_say, R.id.text_time}));
+        listViewWeixin.setAdapter(new WeixinViewAdapter(this, items));
+//        listViewWeixin.setAdapter(new SimpleAdapter(this, listItems, R.layout.main_tab_weixin_item,
+//                new String[]{"icon", "name", "say", "time"},
+//                new int[]{R.id.img_icon, R.id.text_name, R.id.text_say, R.id.text_time}));
     }
 
 

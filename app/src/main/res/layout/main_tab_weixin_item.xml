@@ -6,7 +6,7 @@
     android:background="@drawable/mm_listitem">
 
     <ImageView
-        android:id="@+id/img_icon"
+        android:id="@+id/img_head"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_alignParentLeft="true"
@@ -16,20 +16,20 @@
 
 
     <TextView
-        android:id="@+id/text_name"
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/img_icon"
+        android:layout_toRightOf="@id/img_head"
         android:text="小黑"
         android:padding="7dp"
         android:textColor="#000"
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/text_say"
+        android:id="@+id/tv_say"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/img_icon"
+        android:layout_toRightOf="@id/img_head"
         android:layout_alignParentBottom="true"
         android:ellipsize="end"
         android:padding="7dp"
@@ -40,7 +40,7 @@
         android:textSize="14dp" />
 
     <TextView
-        android:id="@+id/text_time"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
